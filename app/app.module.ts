@@ -11,6 +11,7 @@ import { CitiesListPage } from './pages/cities.list/cities.list.component';
 
 import { CitiesDetailService } from './pages/city.detail/city.detail.service';
 import { CitiesListService } from './pages/cities.list/cities.list.service';
+import { LocalStorageProvider } from './shared/storage.provider';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { CitiesListService } from './pages/cities.list/cities.list.service';
     ],
     providers: [
         CitiesListService,
-        CitiesDetailService
+        CitiesDetailService,
+        LocalStorageProvider
     ],
     bootstrap: [AppComponent]
 })

@@ -1,10 +1,11 @@
+import { LocalStorageProvider } from './../../shared/storage.provider';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable, Observer } from 'rxjs'
 
 @Injectable()
 export class CitiesListService {
-    constructor(private _http: Http) { }
+    constructor(private _http: Http, private _storage: LocalStorageProvider) { }
 
     getCitiesList(): Observable<any> {
         return Observable.create((observer: Observer<any>) => { });

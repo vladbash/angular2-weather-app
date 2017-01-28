@@ -3,6 +3,11 @@ var webpack = require('webpack');
 var HtmlPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var stylesPath = [
+    path.resolve(__dirname, '.', 'app', 'pages'),
+    path.resolve(__dirname, '.', 'app', 'components')
+];
+
 var config = {
     cache: true,
     devtool: 'source-map',
@@ -22,8 +27,14 @@ var config = {
         loaders: [
             { test: /\.ts$/, loader: 'awesome-typescript-loader' },
             { test: /\.pug/, loader: 'pug-loader' },
+            /*{
+                test: /\.scss$/,
+                include: stylesPath,
+                loader: ExtractTextPlugin.extract('to-string-loader', 'style-loader', 'css-loader?sourceMap!resolve-url!sass-loader?sourceMap')
+            },*/
             {
                 test: /\.scss$/,
+                //exclude: stylesPath,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap!resolve-url!sass-loader?sourceMap')
             },
             { test: /\.woff$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },

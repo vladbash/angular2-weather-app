@@ -5,6 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+import { AppComponent } from './app.component';
+import { CityDetailPage } from './pages/city.detail/city.detail.component';
+import { CitiesListPage } from './pages/cities.list/cities.list.component';
+
+import { CitiesDetailService } from './pages/city.detail/city.detail.service';
+import { CitiesListService } from './pages/cities.list/cities.list.service';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -12,9 +19,16 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
         AppRouter,
         HttpModule,
     ],
-    declarations: [],
-    providers: [],
-    bootstrap: []
+    declarations: [
+        AppComponent,
+        CitiesListPage,
+        CityDetailPage
+    ],
+    providers: [
+        CitiesListService,
+        CitiesDetailService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
 

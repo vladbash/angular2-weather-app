@@ -20,10 +20,7 @@ var config = {
     },
     module: {
         loaders: [
-            {
-                test: /\.ts$/,
-                loader: 'awesome-typescript-loader'
-            },
+            { test: /\.ts$/, loader: 'awesome-typescript-loader' },
             { test: /\.pug/, loader: 'pug-loader' },
             {
                 test: /\.scss$/,

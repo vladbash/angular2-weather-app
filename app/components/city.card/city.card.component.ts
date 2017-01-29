@@ -1,3 +1,6 @@
+import { HelperService } from './../../shared/helper.service';
+import { CitiesListService } from './../../pages/cities.list/cities.list.service';
+import { ICity } from './../../pages/city.detail/city.detail.service';
 import { OnInit, Component, Input } from '@angular/core';
 
 @Component({
@@ -7,9 +10,9 @@ import { OnInit, Component, Input } from '@angular/core';
 })
 export class CityCardComponent implements OnInit {
 
-    @Input() city: string;
+    @Input() city: ICity;
 
-    constructor() { }
+    constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
 
     ngOnInit(): void { }
 }

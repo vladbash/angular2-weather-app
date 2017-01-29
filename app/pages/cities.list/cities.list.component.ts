@@ -1,3 +1,5 @@
+import { CitiesListService } from './cities.list.service';
+import { HelperService } from './../../shared/helper.service';
 import { OnInit, Component } from '@angular/core';
 
 @Component({
@@ -6,9 +8,20 @@ import { OnInit, Component } from '@angular/core';
     styles: [require('./cities.list.scss').toString()]
 })
 export class CitiesListPage implements OnInit {
-    constructor() { }
+    constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
 
-    ngOnInit(): void { 
-        console.log(require('./cities.list.scss')());
+    ngOnInit(): void {
+        this._helperService.getCurrentCity()
+            .first()
+            .subscribe(() => {
+                this._updateCityWeatherList();
+            });
+    }
+
+    private _updateCityWeatherList(): void {
+        this._citiesListService.getCitiesList()
+            .subscribe(data => {
+                console.log(data);
+            });
     }
 }

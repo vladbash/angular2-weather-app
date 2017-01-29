@@ -33,6 +33,7 @@
     "@angular/router": "3.4.3",
     "@angular/upgrade": "2.4.3",
     "@types/lodash": "^4.14.50",
+    "angular2-uuid": "^1.1.1",
     "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "lodash": "^4.16.2",

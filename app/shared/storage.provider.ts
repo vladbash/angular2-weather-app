@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
+import { UUID } from 'angular2-uuid';
 import * as _ from 'lodash';
 
 export interface IStorageProvider {
@@ -70,9 +71,10 @@ export class LocalStorageProvider implements IStorageProvider {
 
     post(query: ILocalStorageQuery, data: any): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
-            let response: any = JSON.parse(localStorage.getItem(query.collection));
+            let response: any = JSON.parse(localStorage.getItem(query.collection)) || [];
+            if(!_.has(data, 'id')) data.id = UUID.UUID();
             response.push(data);
-            observer.next(localStorage.setItem(query.collection, response));
+            observer.next(localStorage.setItem(query.collection, JSON.stringify(response)));
         });
     }
 

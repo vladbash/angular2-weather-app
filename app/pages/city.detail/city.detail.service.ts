@@ -11,17 +11,27 @@ export interface ICity {
     /**
      * @description city Id
      */
-    id: any;
+    id?: any;
 
     /**
      * @description city name
      */
-    name: string;
+    name?: string;
 
     /**
-     * @description city code
+     * @description country 
      */
-    cod?: string;
+    country?: string;
+
+    /**
+     * @description city geo location, latitude
+     */
+    lat?: number;
+
+    /**
+     * @description city geo location, longitude
+     */
+    long?: number;
 }
 
 export interface IWeather {

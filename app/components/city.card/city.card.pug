@@ -1,0 +1,7 @@
+.card
+    .card-block
+        div(*ngIf="!city")
+            p-autoComplete([(ngModel)]="newCityEntitie.country", [suggestions]="countriesList", (completeMethod)="search($event)", field="name")
+            input(type="text", pInputText, [(ngModel)]="newCityEntitie.name")
+            button(pButton, type="button", label="Add city...", (click)="addCity()")
+        div(*ngIf="city")

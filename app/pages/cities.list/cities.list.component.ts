@@ -11,7 +11,7 @@ export class CitiesListPage implements OnInit {
     constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
 
     ngOnInit(): void {
-        this._helperService.getCurrentCity()
+        this._citiesListService.getCurrentCity()
             .first()
             .subscribe(() => {
                 this._updateCityWeatherList();

@@ -1,6 +1,7 @@
 import { Http } from '@angular/http';
 import { Observable, Observer } from 'rxjs';
 import { Injectable } from '@angular/core';
+import * as _ from 'lodash';
 
 import { TemperatureType } from '../pages/city.detail/city.detail.service';
 import { LocalStorageProvider, ILocalStorageQuery } from './storage.provider';
@@ -51,29 +52,22 @@ export class HelperService {
     }
 
     /**
-     * @description method for checking and getting current city
+     * @description method for getting country list
+     * @param query is query for search
      */
-    getCurrentCity(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            navigator.geolocation.getCurrentPosition(result => {
-                this.getCityByCoordinates(result.coords.latitude, result.coords.longitude)
-                    .subscribe(response => {
-                        this._localStorageProvider.get(<ILocalStorageQuery>{
-                            collection: StorageCollections.city,
-                            fieldsEqual: [`name=${response.name}`, `country=${response.country}`]
-                        }).subscribe(data => {
-                            if (!data || data.length === 0) {
-                                this._localStorageProvider.post(<ILocalStorageQuery>{
-                                    collection: StorageCollections.city
-                                }, response).subscribe(postResponse => {
-                                    observer.next(response);
-                                })
-                            } else {
-                                observer.next(response);
-                            }
-                        });
-                    });
+    getCountriesList(query?: string): Observable<any> {
+        return this._http.get(API_ROUTES.getCountries)
+            .map(response => response.json())
+            .map(response => {
+                return _.chain(response)
+                    .filter((e: any) => (e.name.toLowerCase().indexOf((query || '').toLowerCase()) !== -1))
+                    .map((e: any) => {
+                        return {
+                            name: e.name,
+                            alpha2Code: e.alpha2Code,
+                            alpha3Code: e.alpha3Code
+                        };
+                    }).value();
             });
-        });
     }
 }

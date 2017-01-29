@@ -1,7 +1,9 @@
+import { API_ROUTES } from './../../config/api.routes';
 import { LocalStorageProvider } from './../../shared/storage.provider';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
+import * as translit from 'transliterate';
 
 export enum TemperatureType {
     Kelvin, Celsius, Fahrenheit
@@ -75,7 +77,8 @@ export interface IWeather {
 export class CitiesDetailService {
     constructor(private _http: Http, private _storage: LocalStorageProvider) { }
 
-    getCityDetails(): Observable<any> {
-        return this._http.get('');
+    getCityDetails(city: ICity): Observable<any> {
+        return this._http.get(API_ROUTES.openWeatherMap({ city: translit(city.name), country: city.country }))
+            .map(response => response.json());
     }
 }

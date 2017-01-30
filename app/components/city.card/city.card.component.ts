@@ -1,8 +1,8 @@
+import { OnInit, Component, Input, Output, AfterViewInit, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HelperService } from './../../shared/helper.service';
 import { CitiesListService } from './../../pages/cities.list/cities.list.service';
 import { ICity, CityDetailService, IWeather } from './../../pages/city.detail/city.detail.service';
-import { OnInit, Component, Input, AfterViewInit } from '@angular/core';
 
 
 @Component({
@@ -13,6 +13,8 @@ import { OnInit, Component, Input, AfterViewInit } from '@angular/core';
 export class CityCardComponent implements OnInit, AfterViewInit {
 
     @Input() city: ICity;
+
+    @Output() updateEvent: EventEmitter<any> = new EventEmitter<any>();
 
     cityWeather: IWeather;
 

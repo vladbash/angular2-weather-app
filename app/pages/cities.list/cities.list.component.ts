@@ -11,18 +11,18 @@ import { OnInit, Component } from '@angular/core';
 export class CitiesListPage implements OnInit {
 
     citiesList: ICity[];
-    
+
     constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
 
     ngOnInit(): void {
         this._citiesListService.getCurrentCity()
             .first()
             .subscribe(() => {
-                this._updateCityWeatherList();
+                this.updateCityWeatherList();
             });
     }
 
-    private _updateCityWeatherList(): void {
+    updateCityWeatherList(): void {
         this._citiesListService.getCitiesList()
             .subscribe(data => {
                 this.citiesList = <ICity[]>data;

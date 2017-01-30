@@ -2,4 +2,4 @@
     .col-sm-4(*ngFor="let city of citiesList")
         city-card([city]="city")
     .col-sm-4
-        city-card
+        city-card((updateEvent)="updateCityWeatherList()")

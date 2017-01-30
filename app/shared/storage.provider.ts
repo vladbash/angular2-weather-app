@@ -6,27 +6,27 @@ import * as _ from 'lodash';
 export interface IStorageProvider {
     /**
      * @description method for get data from storage
-     * @param query is query for getting data
+     * @param query - query for getting data
      */
     get(query: string | any): Observable<any>;
 
     /**
      * @description method for create data in collection
-     * @param query is query for posting data
-     * @param data is posting data
+     * @param query - query for posting data
+     * @param data - posting data
      */
     post(query: string | any, data: any): Observable<any>;
 
     /**
      * @description method for update data in collection
-     * @param query is query for updating data
-     * @param data is updating data
+     * @param query - query for updating data
+     * @param data - updating data
      */
     put?(query: string | any, data: any): Observable<any>;
 
     /**
      * @description method for deleting
-     * @param query is query for deleting
+     * @param query - query for deleting
      */
     delete?(query: string | any): Observable<any>;
 }

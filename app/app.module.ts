@@ -11,7 +11,7 @@ import { CityDetailPage } from './pages/city.detail/city.detail.component';
 import { CitiesListPage } from './pages/cities.list/cities.list.component';
 import { CityCardComponent } from './components/city.card/city.card.component';
 
-import { CitiesDetailService } from './pages/city.detail/city.detail.service';
+import { CityDetailService } from './pages/city.detail/city.detail.service';
 import { CitiesListService } from './pages/cities.list/cities.list.service';
 import { LocalStorageProvider } from './shared/storage.provider';
 import { HelperService } from './shared/helper.service';
@@ -34,7 +34,7 @@ import { HelperService } from './shared/helper.service';
     ],
     providers: [
         CitiesListService,
-        CitiesDetailService,
+        CityDetailService,
         LocalStorageProvider,
         HelperService
     ],

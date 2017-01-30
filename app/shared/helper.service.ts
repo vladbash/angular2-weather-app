@@ -16,9 +16,9 @@ export class HelperService {
 
     /**
      * @description method for converting temperature
-     * @param value is object for converting
-     * @param from is starting type
-     * @param to is returning type
+     * @param value - object for converting
+     * @param from - starting type
+     * @param to - returning type
      * @return converted value
      */
     temperatureConverter(value: number, from: TemperatureType = TemperatureType.Kelvin, to: TemperatureType = TemperatureType.Celsius): number {
@@ -33,8 +33,8 @@ export class HelperService {
 
     /**
      * @description get city info by coordinates
-     * @param lat is city geo location, latitude
-     * @param lng is city geo location, longitude
+     * @param lat - city geo location, latitude
+     * @param lng - city geo location, longitude
      */
     getCityByCoordinates(lat: number, lng: number): Observable<ICity> {
         return Observable.create((observer: Observer<any>) => {
@@ -53,7 +53,7 @@ export class HelperService {
 
     /**
      * @description method for getting country list
-     * @param query is query for search
+     * @param query - query for search
      */
     getCountriesList(query?: string): Observable<any> {
         return this._http.get(API_ROUTES.getCountries)

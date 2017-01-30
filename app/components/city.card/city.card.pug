@@ -5,3 +5,6 @@
             input(type="text", pInputText, [(ngModel)]="newCityEntitie.name")
             button(pButton, type="button", label="Add city...", (click)="addCity()")
         div(*ngIf="city")
+            h3.card-title {{ city.name }}, {{ city.country }}
+            p.card-text {{ cityWeather.main }}
+            a.btn.btn-primary([routerLink]="['/city', city.id]") Details

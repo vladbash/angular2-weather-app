@@ -1,3 +1,4 @@
+import { ICity } from './../city.detail/city.detail.service';
 import { CitiesListService } from './cities.list.service';
 import { HelperService } from './../../shared/helper.service';
 import { OnInit, Component } from '@angular/core';
@@ -8,6 +9,9 @@ import { OnInit, Component } from '@angular/core';
     styles: [require('./cities.list.scss').toString()]
 })
 export class CitiesListPage implements OnInit {
+
+    citiesList: ICity[];
+    
     constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
 
     ngOnInit(): void {
@@ -21,7 +25,7 @@ export class CitiesListPage implements OnInit {
     private _updateCityWeatherList(): void {
         this._citiesListService.getCitiesList()
             .subscribe(data => {
-                console.log(data);
+                this.citiesList = <ICity[]>data;
             });
     }
 }

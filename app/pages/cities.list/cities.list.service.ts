@@ -1,5 +1,5 @@
 import { HelperService } from './../../shared/helper.service';
-import { ICity, CitiesDetailService } from './../city.detail/city.detail.service';
+import { ICity, CityDetailService } from './../city.detail/city.detail.service';
 import { StorageCollections } from './../../config/constants';
 import { LocalStorageProvider, ILocalStorageQuery } from './../../shared/storage.provider';
 import { Injectable } from '@angular/core';
@@ -8,7 +8,7 @@ import { Observable, Observer } from 'rxjs'
 
 @Injectable()
 export class CitiesListService {
-    constructor(private _http: Http, private _storage: LocalStorageProvider, private _citiesDetailService: CitiesDetailService, private _helperService: HelperService) { }
+    constructor(private _http: Http, private _storage: LocalStorageProvider, private _citiesDetailService: CityDetailService, private _helperService: HelperService) { }
 
     /**
      * @description method for getting cities list
@@ -42,7 +42,7 @@ export class CitiesListService {
 
     /**
      * @description method for creating city object
-     * @param city is the city object
+     * @param city - the city object
      */
     addCityToList(city: ICity): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
@@ -69,7 +69,7 @@ export class CitiesListService {
 
     /**
      * @description method for deleting city from base
-     * @param id is the city identitie key
+     * @param id - the city identitie key
      */
     deleteCity(id: string): Observable<any> {
         return this._storage.delete(<ILocalStorageQuery>{

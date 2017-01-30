@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HelperService } from './../../shared/helper.service';
 import { CitiesListService } from './../../pages/cities.list/cities.list.service';
-import { ICity } from './../../pages/city.detail/city.detail.service';
+import { ICity, CityDetailService, IWeather } from './../../pages/city.detail/city.detail.service';
 import { OnInit, Component, Input, AfterViewInit } from '@angular/core';
 
 @Component({
@@ -13,17 +13,26 @@ export class CityCardComponent implements OnInit, AfterViewInit {
 
     @Input() city: ICity;
 
+    cityWeather: IWeather;
+
     countriesList: any;
 
     newCityEntitie: ICity;
 
-    constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
+    constructor(private _helperService: HelperService, private _citiesListService: CitiesListService, private _cityDetail: CityDetailService) { }
 
     ngOnInit(): void {
         this.newCityEntitie = <ICity>{
             country: '',
             city: ''
         };
+        this.cityWeather = <IWeather>{};
+        if (this.city) {
+            this._cityDetail.getWeather(this.city)
+                .subscribe(data => {
+                    this.cityWeather = data;
+                });
+        }
     }
 
     ngAfterViewInit(): void {

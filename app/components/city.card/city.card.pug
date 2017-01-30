@@ -1,4 +1,4 @@
-.card
+.card.test
     .card-block
         div(*ngIf="!city")
             p-autoComplete([(ngModel)]="newCityEntitie.country", [suggestions]="countriesList", (completeMethod)="search($event)", field="name")

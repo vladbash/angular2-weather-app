@@ -4,10 +4,11 @@ import { CitiesListService } from './../../pages/cities.list/cities.list.service
 import { ICity, CityDetailService, IWeather } from './../../pages/city.detail/city.detail.service';
 import { OnInit, Component, Input, AfterViewInit } from '@angular/core';
 
+
 @Component({
     selector: 'city-card',
     template: require('./city.card.pug')(),
-    styleUrls: [require('./city.card.scss').toString()]
+    styles: [String(require('./city.card.scss'))]
 })
 export class CityCardComponent implements OnInit, AfterViewInit {
 

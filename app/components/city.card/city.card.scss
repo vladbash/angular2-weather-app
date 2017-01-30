@@ -2,12 +2,15 @@
   box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.3);
   margin: 15px;
 }
+
 .temperature {
   font-size: 52px;
 }
+
 .text-center {
   text-align: center;
 }
+
 .card-color-weather-cold {
   background: #f2f6f8; /* Old browsers */
   background: -moz-linear-gradient(-45deg,  #f2f6f8 0%, #d8e1e7 26%, #b5c6d0 75%, #e0eff9 100%); /* FF3.6-15 */
@@ -17,7 +20,9 @@
   
   color: #fff;
 }
+
 .card-color-weather-middle {
+
   background: #e6f0a3; /* Old browsers */
   background: -moz-linear-gradient(-45deg,  #e6f0a3 0%, #d2e638 32%, #c3d825 88%, #dbf043 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(-45deg,  #e6f0a3 0%,#d2e638 32%,#c3d825 88%,#dbf043 100%); /* Chrome10-25,Safari5.1-6 */
@@ -26,6 +31,7 @@
 
   color: #fff;
 }
+
 .card-color-weather-hot {
   background: #ffa84c; /* Old browsers */
   background: -moz-linear-gradient(-45deg,  #ffa84c 0%, #ff7b0d 13%, #ff7b0d 40%, #ff7b0d 84%); /* FF3.6-15 */
@@ -35,6 +41,68 @@
 
   color: #fff;
 }
+
 .text-center .btn-outline-info {
   border-color: #fff;
+}
+
+.temperature i.material-icons {
+  position: relative;
+  font-size: 48px;
+  left: 15px;
+  top: 5px;
+}
+
+.card-add-location {
+  background-color: #e6e6e6;
+}
+
+.add-location label {
+  width: 205px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.add-location button {
+  display: block;
+  margin: 0 auto;
+}
+
+.ui-inputtext {
+  width: 205px;
+}
+
+.add-location .ui-button {
+  background: transparent;
+  border-color: #fff;
+  color: #5bc0de;
+  transition: all .2s ease-in-out;
+  padding: .3rem .1rem;
+
+}
+
+.add-location .ui-button:hover {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
+.close-card {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.add-location-item {
+    width: 100%;
+    border: 3px dashed #999;
+    height: 75px;
+    text-align: center;
+}
+
+.add-location-item i {
+    line-height: 33px;
+    font-size: 54px;
+    color: #999;
 }

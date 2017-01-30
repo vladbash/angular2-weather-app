@@ -117,6 +117,7 @@ export class CityDetailService {
                 .subscribe(data => {
                     observer.next(<IWeather>{
                         main: data.weather[0].main || '',
+                        icon: data.weather[0].icon || '',
                         description: data.weather[0].description || '',
                         temperature: this._helperService.temperatureConverter(data.main.temp || 0, TemperatureType.Kelvin, TemperatureType.Celsius),
                         humidity: data.main.humidity || 0,
@@ -164,6 +165,7 @@ export class CityDetailService {
                                 weather: <IWeather>{
                                     main: e.weather[0].main || '',
                                     description: e.weather[0].description || '',
+                                    icon: e.weather[0].icon || '',
                                     temperature: this._helperService.temperatureConverter(e.main.temp || 0, TemperatureType.Kelvin, TemperatureType.Celsius),
                                     humidity: e.main.humidity || 0,
                                     temp_max: this._helperService.temperatureConverter(e.main.temp_max || 0, TemperatureType.Kelvin, TemperatureType.Celsius),

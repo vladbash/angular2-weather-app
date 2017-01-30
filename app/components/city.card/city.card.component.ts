@@ -18,6 +18,8 @@ export class CityCardComponent implements OnInit, AfterViewInit {
 
     cityWeather: IWeather;
 
+    addMode: boolean;
+
     cardColor: string;
 
     countriesList: any;
@@ -29,6 +31,7 @@ export class CityCardComponent implements OnInit, AfterViewInit {
     constructor(private _helperService: HelperService, private _citiesListService: CitiesListService, private _cityDetail: CityDetailService) { }
 
     ngOnInit(): void {
+        this.addMode = false;
         this.newCityEntitie = <ICity>{
             country: '',
             city: ''
@@ -65,6 +68,10 @@ export class CityCardComponent implements OnInit, AfterViewInit {
         this._citiesListService.addCityToList(newCity)
             .subscribe(data => {
                 this.updateEvent.emit();
+                this.newCityEntitie = <ICity>{
+                    country: '',
+                    city: ''
+                };
             });
     }
 }

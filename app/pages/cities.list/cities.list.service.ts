@@ -43,11 +43,13 @@ export class CitiesListService {
     /**
      * @description method for creating city object
      * @param city - the city object
+     * @param isLocal - local autoadd flag
      */
-    addCityToList(city: ICity): Observable<any> {
+    addCityToList(city: ICity, isLocal: boolean = false): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
             this._citiesDetailService.getCityDetails(city)
                 .subscribe(data => {
+                    if (isLocal) city.local = true;
                     city.name = data.name;
                     city.country = data.sys.country;
                     city.long = data.coord.lon;
@@ -69,12 +71,24 @@ export class CitiesListService {
 
     /**
      * @description method for deleting city from base
-     * @param id - the city identitie key
+     * @param city - the city valid city entitie
      */
-    deleteCity(id: string): Observable<any> {
-        return this._storage.delete(<ILocalStorageQuery>{
-            collection: StorageCollections.city,
-            id: id
+    deleteCity(city: ICity): Observable<any> {
+        return Observable.create((observer: Observer<any>) => {
+            if(!city) return;
+            debugger
+            if (city.local) {
+                city.deleted = true;
+                observer.next(this._storage.put(<ILocalStorageQuery>{
+                    collection: StorageCollections.city,
+                    id: city.id
+                }, city));
+            } else {
+                observer.next(this._storage.delete(<ILocalStorageQuery>{
+                    collection: StorageCollections.city,
+                    id: city.id
+                }));
+            }
         });
     }
 }

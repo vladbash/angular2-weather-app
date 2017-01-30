@@ -15,6 +15,7 @@ export class CityCardComponent implements OnInit, AfterViewInit {
     @Input() city: ICity;
 
     @Output() updateEvent: EventEmitter<any> = new EventEmitter<any>();
+    @Output() deleteEvent: EventEmitter<any> = new EventEmitter<any>();
 
     cityWeather: IWeather;
 
@@ -46,7 +47,6 @@ export class CityCardComponent implements OnInit, AfterViewInit {
             this._cityDetail.getDetailWeatherForecastPerDay(this.city)
                 .subscribe(data => {
                     this.weatherForecastList = data;
-                    console.log(data);
                 });
         }
     }
@@ -73,5 +73,9 @@ export class CityCardComponent implements OnInit, AfterViewInit {
                     city: ''
                 };
             });
+    }
+
+    deleteCity(): void {
+        this.deleteEvent.emit(this.city);
     }
 }

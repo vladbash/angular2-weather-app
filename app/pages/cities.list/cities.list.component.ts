@@ -30,4 +30,12 @@ export class CitiesListPage implements OnInit {
                 });
             });
     }
+
+    deleteCity(city: ICity): void {
+        this._citiesListService.deleteCity(city)
+            .subscribe(data => {
+                console.log(data);
+                this.updateCityWeatherList();
+            });
+    }
 }

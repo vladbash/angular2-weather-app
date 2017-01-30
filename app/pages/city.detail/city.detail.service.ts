@@ -38,6 +38,16 @@ export interface ICity {
      * @description city geo location, longitude
      */
     long?: number;
+
+    /**
+     * @description local flag
+     */
+    local?: boolean;
+
+    /**
+     * @description deleted flag (it's flag only for local)
+     */
+    deleted?: boolean;
 }
 
 export interface IWeather {

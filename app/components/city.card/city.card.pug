@@ -9,7 +9,7 @@
                 input(type="text", pInputText, [(ngModel)]="newCityEntitie.name", placeholder="City")
             button(pButton, class="btn btn-outline-info", type="button", label="Add city...", (click)="addCity()")
         div(*ngIf="city")
-            i.material-icons.close-card close
+            i.material-icons.close-card((click)="deleteCity()") close
             h3.card-title {{ city.name }}, {{ city.country }}
             p.card-text {{ cityWeather.main }}
             p.temperature.text-center {{ cityWeather.temperature }} &deg;

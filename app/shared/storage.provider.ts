@@ -87,7 +87,7 @@ export class LocalStorageProvider implements IStorageProvider {
                     e.id = query.id;
                 }
             });
-            observer.next(localStorage.setItem(query.collection, response));
+            observer.next(localStorage.setItem(query.collection, JSON.stringify(response)));
         });
     }
 
@@ -96,7 +96,9 @@ export class LocalStorageProvider implements IStorageProvider {
             if (_.has(query, 'id')) {
                 let response: any = JSON.parse(localStorage.getItem(query.collection));
                 _.remove(response, (e: any) => e.id === query.id);
-                observer.next(localStorage.setItem(query.collection, response));
+                console.log(response);
+                
+                observer.next(localStorage.setItem(query.collection, JSON.stringify(response)));
             } else {
                 observer.next(localStorage.removeItem(query.collection));
             }

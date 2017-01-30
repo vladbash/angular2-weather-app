@@ -1,5 +1,5 @@
 .row
     .col-sm-4(*ngFor="let city of citiesList")
-        city-card([city]="city")
+        city-card([city]="city", (deleteEvent)="deleteCity($event)")
     .col-sm-4
         city-card((updateEvent)="updateCityWeatherList()")

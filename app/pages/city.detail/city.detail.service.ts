@@ -1,3 +1,4 @@
+import { HelperService } from './../../shared/helper.service';
 import { API_ROUTES } from './../../config/api.routes';
 import { LocalStorageProvider, ILocalStorageQuery } from './../../shared/storage.provider';
 import { StorageCollections } from './../../config/constants';
@@ -6,6 +7,7 @@ import { Http } from '@angular/http';
 import { Observable, Observer } from 'rxjs';
 import * as translit from 'transliterate';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 export enum TemperatureType {
     Kelvin, Celsius, Fahrenheit
@@ -94,7 +96,7 @@ export interface IWeatherForecast {
 
 @Injectable()
 export class CityDetailService {
-    constructor(private _http: Http, private _storage: LocalStorageProvider) { }
+    constructor(private _http: Http, private _storage: LocalStorageProvider, private _helperService: HelperService) { }
 
     /**
      * @description method for city checking and standartisation
@@ -116,7 +118,7 @@ export class CityDetailService {
                     observer.next(<IWeather>{
                         main: data.weather[0].main || '',
                         description: data.weather[0].description || '',
-                        temperature: data.main.temp || 0,
+                        temperature: this._helperService.temperatureConverter(data.main.temp || 0, TemperatureType.Kelvin, TemperatureType.Celsius),
                         humidity: data.main.humidity || 0,
                         temp_max: data.main.temp_max || 0,
                         temp_min: data.main.temp_min || 0,
@@ -162,16 +164,31 @@ export class CityDetailService {
                                 weather: <IWeather>{
                                     main: e.weather[0].main || '',
                                     description: e.weather[0].description || '',
-                                    temperature: e.main.temp || 0,
+                                    temperature: this._helperService.temperatureConverter(e.main.temp || 0, TemperatureType.Kelvin, TemperatureType.Celsius),
                                     humidity: e.main.humidity || 0,
-                                    temp_max: e.main.temp_max || 0,
-                                    temp_min: e.main.temp_min || 0,
+                                    temp_max: this._helperService.temperatureConverter(e.main.temp_max || 0, TemperatureType.Kelvin, TemperatureType.Celsius),
+                                    temp_min: this._helperService.temperatureConverter(e.main.temp_min || 0, TemperatureType.Kelvin, TemperatureType.Celsius),
                                     pressure: e.main.pressure || 0
                                 }
                             };
                         })
                         .value()
                     );
+                });
+        });
+    }
+
+    /**
+     * @description method for getting detail weather for today
+     * @param city - valid city object
+     */
+    getDetailWeatherForecastPerDay(city: ICity): Observable<any> {
+        return Observable.create((observer: Observer<any>) => {
+            this.getDetailWeatherForecast(city)
+                .subscribe(data => {
+                    observer.next(_.chain(data)
+                        .take(6)
+                        .value());
                 });
         });
     }

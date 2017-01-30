@@ -4,6 +4,7 @@
     "core-js": "registry:dt/core-js#0.0.0+20160725163759",
     "d3": "registry:dt/d3#0.0.0+20160907005744",
     "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
-    "node": "registry:dt/node#6.0.0+20160909174046"
+    "node": "registry:dt/node#6.0.0+20160909174046",
+    "moment": "registry:dt/moment#2.11.1+20161010105546"
   }
 }

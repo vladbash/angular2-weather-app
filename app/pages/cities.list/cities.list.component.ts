@@ -1,7 +1,7 @@
 import { ICity } from './../city.detail/city.detail.service';
 import { CitiesListService } from './cities.list.service';
 import { HelperService } from './../../shared/helper.service';
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, NgZone } from '@angular/core';
 
 @Component({
     selector: 'cities-list',
@@ -12,7 +12,7 @@ export class CitiesListPage implements OnInit {
 
     citiesList: ICity[];
 
-    constructor(private _helperService: HelperService, private _citiesListService: CitiesListService) { }
+    constructor(private _helperService: HelperService, private _citiesListService: CitiesListService, private _ngZone: NgZone) { }
 
     ngOnInit(): void {
         this._citiesListService.getCurrentCity()
@@ -25,7 +25,9 @@ export class CitiesListPage implements OnInit {
     updateCityWeatherList(): void {
         this._citiesListService.getCitiesList()
             .subscribe(data => {
-                this.citiesList = <ICity[]>data;
+                this._ngZone.run(() => {
+                    this.citiesList = <ICity[]>data;
+                });
             });
     }
 }

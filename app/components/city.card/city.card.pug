@@ -1,4 +1,4 @@
-.card.card-shadow.card-color-weather-middle
+.card.card-shadow(class='{{ city ? "card-color-weather-" + cardColor : "card-add-location" }}')
     .card-block
         div(*ngIf="!city")
             p-autoComplete([(ngModel)]="newCityEntitie.country", [suggestions]="countriesList", (completeMethod)="search($event)", field="name")
@@ -7,32 +7,12 @@
         div(*ngIf="city")
             h3.card-title {{ city.name }}, {{ city.country }}
             p.card-text {{ cityWeather.main }}
-            p.temperature.text-center 45 &deg;
+            p.temperature.text-center {{ cityWeather.temperature }} &deg;
             i.material-icons cloud_queue
             .row
-                .col-sm-2.text-center
-                    p 4
+                .col-sm-2.text-center(*ngFor="let forecatsItem of weatherForecastList")
+                    p {{ forecatsItem.date_text | date:'shortTime' }}
                     p icon
-                    p 18 &deg;
-                .col-sm-2.text-center
-                    p 8
-                    p icon
-                    p 18 &deg;
-                .col-sm-2.text-center
-                    p 12
-                    p icon
-                    p 18 &deg;
-                .col-sm-2.text-center
-                    p 16
-                    p icon
-                    p 18 &deg;
-                .col-sm-2.text-center
-                    p 20
-                    p icon
-                    p 18 &deg;
-                .col-sm-2.text-center
-                    p 24
-                    p icon
-                    p 18 &deg;
+                    p {{ forecatsItem.weather.temperature }} &deg;
             .text-center
                 a.btn.btn-outline-info([routerLink]="['/city', city.id]") Details

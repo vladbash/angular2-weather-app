@@ -18,9 +18,13 @@ export class CityCardComponent implements OnInit, AfterViewInit {
 
     cityWeather: IWeather;
 
+    cardColor: string;
+
     countriesList: any;
 
     newCityEntitie: ICity;
+
+    weatherForecastList: any[];
 
     constructor(private _helperService: HelperService, private _citiesListService: CitiesListService, private _cityDetail: CityDetailService) { }
 
@@ -34,6 +38,12 @@ export class CityCardComponent implements OnInit, AfterViewInit {
             this._cityDetail.getWeather(this.city)
                 .subscribe(data => {
                     this.cityWeather = data;
+                    this.cardColor = this.cityWeather.temperature < 0 ? 'cold' : (this.cityWeather.temperature > 20 ? 'hot' : 'middle');
+                });
+            this._cityDetail.getDetailWeatherForecastPerDay(this.city)
+                .subscribe(data => {
+                    this.weatherForecastList = data;
+                    console.log(data);
                 });
         }
     }
@@ -54,8 +64,7 @@ export class CityCardComponent implements OnInit, AfterViewInit {
         newCity.country = <any>newCity.country.alpha2Code;
         this._citiesListService.addCityToList(newCity)
             .subscribe(data => {
-                debugger
-            })
+                this.updateEvent.emit();
+            });
     }
-
 }

@@ -18,7 +18,7 @@ var config = {
         styles: './app/scss/style.scss'
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'doc'),
         filename: '[name].bundle.js',
         sourceMapFilename: '[name].map',
         chunkFilename: '[id].chunk.js'

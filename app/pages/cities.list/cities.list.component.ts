@@ -35,6 +35,7 @@ export class CitiesListPage implements OnInit {
         this._citiesListService.deleteCity(city)
             .subscribe(data => {
                 console.log(data);
+                data.subscribe();
                 this.updateCityWeatherList();
             });
     }

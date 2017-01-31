@@ -31,7 +31,7 @@ export class CitiesListService {
             navigator.geolocation.getCurrentPosition(result => {
                 this._helperService.getCityByCoordinates(result.coords.latitude, result.coords.longitude)
                     .subscribe(response => {
-                        this.addCityToList(response)
+                        this.addCityToList(response, true)
                             .subscribe(data => {
                                 observer.next(data);
                             });
@@ -76,7 +76,6 @@ export class CitiesListService {
     deleteCity(city: ICity): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
             if(!city) return;
-            debugger
             if (city.local) {
                 city.deleted = true;
                 observer.next(this._storage.put(<ILocalStorageQuery>{

@@ -2,7 +2,7 @@
   "name": "angular2-weather-app",
   "version": "1.0.0",
   "description": "",
-  "main": "app/app.module.ts",
+  "main": "dist/index.html",
   "scripts": {
     "clear": "fuser -k -n tcp 3030",
     "start": "webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 3030  --content-base app",

@@ -6,11 +6,7 @@
   "scripts": {
     "clear": "fuser -k -n tcp 3030",
     "start": "webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 3030  --content-base app",
-    "build": "webpack --progress",
-    "postinstall": "typings install",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings"
+    "build": "webpack --progress"
   },
   "repository": {
     "type": "git",

@@ -13,4 +13,4 @@ After installing node dependencies, you neet to install types:
 ## For build app
 `npm run build`
 
-The application will build to directory under label 'doc'
+The application will build to directory under label 'docs'

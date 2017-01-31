@@ -71,7 +71,7 @@ export class CitiesListService {
 
     /**
      * @description method for deleting city from base
-     * @param city - the city valid city entitie
+     * @param city - valid city entitie
      */
     deleteCity(city: ICity): Observable<any> {
         return Observable.create((observer: Observer<any>) => {

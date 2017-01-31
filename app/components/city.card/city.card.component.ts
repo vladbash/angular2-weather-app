@@ -72,6 +72,7 @@ export class CityCardComponent implements OnInit, AfterViewInit {
                     country: '',
                     city: ''
                 };
+                this.addMode = false;
             });
     }
 

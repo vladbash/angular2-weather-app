@@ -1,23 +1,22 @@
 .card.card-shadow(class='{{ city ? "card-color-weather-" + cardColor : "card-add-location" }}')
-    .card-block.add-location-item(*ngIf="!city && !addMode", (click)="addMode = true")
-        i.material-icons add
-    .card-block
+    .card-block(class="{{ !city && !addMode ? 'add-location-item' : '' }}", (click)="addMode = true")
+        i.material-icons(*ngIf="!city && !addMode") add
         .add-location(*ngIf="!city && addMode")
             label
-                p-autoComplete([(ngModel)]="newCityEntitie.country", [suggestions]="countriesList", (completeMethod)="search($event)", field="name", [inputStyleClass]="'classNameInput'", placeholder="Countries")
+                p-autoComplete([(ngModel)]="newCityEntitie.country", [suggestions]="countriesList", (completeMethod)="search($event)", field="name", [inputStyleClass]="'classNameInput'", placeholder="Country")
             label
                 input(type="text", pInputText, [(ngModel)]="newCityEntitie.name", placeholder="City")
             button(pButton, class="btn btn-outline-info", type="button", label="Add city...", (click)="addCity()")
         div(*ngIf="city")
             i.material-icons.close-card((click)="deleteCity()") close
             h3.card-title {{ city.name }}, {{ city.country }}
-            p.card-text {{ cityWeather.main }}
             p.temperature.text-center {{ cityWeather.temperature }} &deg;
+                img(src="http://openweathermap.org/img/w/{{ cityWeather.icon }}.png")
             .row
                 .col-sm-2.text-center(*ngFor="let forecatsItem of weatherForecastList")
                     p {{ forecatsItem.date_text | date:'shortTime' }}
                     p
                         img(src="http://openweathermap.org/img/w/{{ forecatsItem.weather.icon }}.png")
                     p {{ forecatsItem.weather.temperature }} &deg;
-            .text-center
+            //-.text-center
                 a.btn.btn-outline-info([routerLink]="['/city', city.id]") Details

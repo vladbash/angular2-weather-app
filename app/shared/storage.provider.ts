@@ -72,7 +72,7 @@ export class LocalStorageProvider implements IStorageProvider {
     post(query: ILocalStorageQuery, data: any): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
             let response: any = JSON.parse(localStorage.getItem(query.collection)) || [];
-            if(!_.has(data, 'id')) data.id = UUID.UUID();
+            if (!_.has(data, 'id')) data.id = UUID.UUID();
             response.push(data);
             observer.next(localStorage.setItem(query.collection, JSON.stringify(response)));
         });
@@ -80,14 +80,13 @@ export class LocalStorageProvider implements IStorageProvider {
 
     put(query: ILocalStorageQuery, data: any): Observable<any> {
         return Observable.create((observer: Observer<any>) => {
-            let response: any = JSON.parse(localStorage.getItem(query.collection));
-            _.map(response, (e: any) => {
+            observer.next(localStorage.setItem(query.collection, JSON.stringify(_.map(JSON.parse(localStorage.getItem(query.collection)), (e: any) => {
                 if (e.id === query.id) {
                     e = data;
                     e.id = query.id;
                 }
-            });
-            observer.next(localStorage.setItem(query.collection, JSON.stringify(response)));
+                return e;
+            }))));
         });
     }
 
@@ -97,7 +96,7 @@ export class LocalStorageProvider implements IStorageProvider {
                 let response: any = JSON.parse(localStorage.getItem(query.collection));
                 _.remove(response, (e: any) => e.id === query.id);
                 console.log(response);
-                
+
                 observer.next(localStorage.setItem(query.collection, JSON.stringify(response)));
             } else {
                 observer.next(localStorage.removeItem(query.collection));

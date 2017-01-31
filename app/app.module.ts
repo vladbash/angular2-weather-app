@@ -15,6 +15,7 @@ import { CityDetailService } from './pages/city.detail/city.detail.service';
 import { CitiesListService } from './pages/cities.list/cities.list.service';
 import { LocalStorageProvider } from './shared/storage.provider';
 import { HelperService } from './shared/helper.service';
+import { DeletedCityPipe } from './shared/deleted.city.pipe';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { HelperService } from './shared/helper.service';
         AppComponent,
         CitiesListPage,
         CityDetailPage,
-        CityCardComponent
+        CityCardComponent,
+        DeletedCityPipe
     ],
     providers: [
         CitiesListService,
